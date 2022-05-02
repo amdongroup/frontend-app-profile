@@ -29,7 +29,7 @@ import './index.scss';
 subscribe(APP_READY, () => {
   ReactDOM.render(
     <AppProvider store={configureStore()}>
-      <Header />
+      {/* <Header /> */}
       <main>
         <Switch>
           <Route path="/u/:username" component={ProfilePage} />
@@ -37,7 +37,7 @@ subscribe(APP_READY, () => {
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </main>
-      <Footer />
+      {/* <Footer /> */}
     </AppProvider>,
     document.getElementById('root'),
   );
