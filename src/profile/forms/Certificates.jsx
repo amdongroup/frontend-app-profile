@@ -67,6 +67,21 @@ class Certificates extends React.Component {
       }
     })();
 
+    const externalCertificateUrl = (() => {
+
+      let URL_DIVIDER = "/certificates/"
+      let externalCertBaseURL = "https://stg-certificate.apixoxygen.com/certificate/"
+      let certId = ""
+  
+      if(downloadUrl != "") {
+        const certIdAry = downloadUrl.split(URL_DIVIDER)
+        if(certIdAry.length == 2)
+          certId = certIdAry[1]
+      }
+  
+      return externalCertBaseURL + certId
+    })();
+
     return (
       <div key={`${modifiedDate}-${courseId}`} className="col col-sm-6 d-flex align-items-stretch">
         <div className="card mb-4 certificate flex-grow-1">
@@ -103,7 +118,7 @@ class Certificates extends React.Component {
               />
             </p>
             <div>
-              <Hyperlink destination={downloadUrl} className="btn btn-outline-primary" target="_blank">
+              <Hyperlink destination={externalCertificateUrl} className="btn btn-outline-primary" target="_blank">
                 {intl.formatMessage(messages['profile.certificates.view.certificate'])}
               </Hyperlink>
             </div>

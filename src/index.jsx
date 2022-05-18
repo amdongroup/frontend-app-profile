@@ -17,7 +17,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Switch } from 'react-router-dom';
 
-import Header, { messages as headerMessages } from '@edx/frontend-component-header';
+import Header, { messages as headerMessages } from './header';
 import Footer, { messages as footerMessages } from '@edx/frontend-component-footer';
 
 import appMessages from './i18n';
@@ -26,21 +26,38 @@ import configureStore from './data/configureStore';
 
 import './index.scss';
 
+import { getAuthenticatedUser } from '@edx/frontend-platform/auth';
+import { getAuthenticatedHttpClient } from '@edx/frontend-platform/auth';
+import { getConfig } from '@edx/frontend-platform';
+
 subscribe(APP_READY, () => {
-  ReactDOM.render(
-    <AppProvider store={configureStore()}>
-      {/* <Header /> */}
-      <main>
-        <Switch>
-          <Route path="/u/:username" component={ProfilePage} />
-          <Route path="/notfound" component={NotFoundPage} />
-          <Route path="*" component={NotFoundPage} />
-        </Switch>
-      </main>
-      {/* <Footer /> */}
-    </AppProvider>,
-    document.getElementById('root'),
-  );
+
+  const { username } = getAuthenticatedUser()
+  let url = `${getConfig().LMS_BASE_URL}/api/user/v1/accounts/${username}`
+
+  getAuthenticatedHttpClient().get(url).then(
+    data => {
+      console.log("Account Data")
+      console.log(data)
+      console.log(data.data.name)
+      
+      ReactDOM.render(
+        <AppProvider store={configureStore()}>
+          <Header fullName={data.data.name}/>
+          <main>
+            <Switch>
+              <Route path="/u/:username" component={ProfilePage} />
+              <Route path="/notfound" component={NotFoundPage} />
+              <Route path="*" component={NotFoundPage} />
+            </Switch>
+          </main>
+          <Footer />
+        </AppProvider>,
+        document.getElementById('root'),
+      );
+
+    }
+  )
 });
 
 subscribe(APP_INIT_ERROR, (error) => {

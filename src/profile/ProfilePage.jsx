@@ -122,13 +122,15 @@ class ProfilePage extends React.Component {
   }
 
   // Inserted into the DOM in two places (for responsive layout)
-  renderHeadingLockup() {
+  renderHeadingLockup(fullname) {
     const { dateJoined } = this.props;
 
     return (
       <>
         <span data-hj-suppress>
-          <h1 className="h2 mb-0 font-weight-bold">{this.props.match.params.username}</h1>
+        
+          {/* <h1 className="h2 mb-0 font-weight-bold">{this.props.match.params.username}</h1> */}
+          <h1 className="h2 mb-0 font-weight-bold">{fullname}</h1>
           <DateJoined date={dateJoined} />
           <hr className="d-none d-md-block" />
         </span>
@@ -212,7 +214,7 @@ class ProfilePage extends React.Component {
           </div>
           <div className="col pl-0">
             <div className="d-md-none">
-              {this.renderHeadingLockup()}
+              {this.renderHeadingLockup(name)}
             </div>
             <div className="d-none d-md-block float-right">
               {this.renderViewMyRecordsButton()}
@@ -223,7 +225,7 @@ class ProfilePage extends React.Component {
         <div className="row">
           <div className="col-md-4 col-lg-4">
             <div className="d-none d-md-block mb-4">
-              {this.renderHeadingLockup()}
+              {this.renderHeadingLockup(name)}
             </div>
             <div className="d-md-none mb-4">
               {this.renderViewMyRecordsButton()}
