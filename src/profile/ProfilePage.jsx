@@ -68,30 +68,6 @@ class ProfilePage extends React.Component {
     });
   }
 
-  handleSaveProfilePhoto(formData) {
-    this.props.saveProfilePhoto(this.context.authenticatedUser.username, formData);
-  }
-
-  handleDeleteProfilePhoto() {
-    this.props.deleteProfilePhoto(this.context.authenticatedUser.username);
-  }
-
-  handleClose(formId) {
-    this.props.closeForm(formId);
-  }
-
-  handleOpen(formId) {
-    this.props.openForm(formId);
-  }
-
-  handleSubmit(formId) {
-    this.props.saveProfile(formId, this.context.authenticatedUser.username);
-  }
-
-  handleChange(name, value) {
-    this.props.updateDraft(name, value);
-  }
-
   getRecordsUrl(context) {
     let recordsUrl = null;
 
@@ -115,6 +91,30 @@ class ProfilePage extends React.Component {
 
   isAuthenticatedUserProfile() {
     return this.props.match.params.username === this.context.authenticatedUser.username;
+  }
+
+  handleSaveProfilePhoto(formData) {
+    this.props.saveProfilePhoto(this.context.authenticatedUser.username, formData);
+  }
+
+  handleDeleteProfilePhoto() {
+    this.props.deleteProfilePhoto(this.context.authenticatedUser.username);
+  }
+
+  handleClose(formId) {
+    this.props.closeForm(formId);
+  }
+
+  handleOpen(formId) {
+    this.props.openForm(formId);
+  }
+
+  handleSubmit(formId) {
+    this.props.saveProfile(formId, this.context.authenticatedUser.username);
+  }
+
+  handleChange(name, value) {
+    this.props.updateDraft(name, value);
   }
 
   // Inserted into the DOM in two places (for responsive layout)
