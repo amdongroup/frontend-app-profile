@@ -70,7 +70,7 @@ class Certificates extends React.Component {
     const externalCertificateUrl = (() => {
 
       let URL_DIVIDER = "/certificates/"
-      let externalCertBaseURL = "https://sdl-cert-dev.pagewerkz.com/certificate/"
+      let externalCertBaseURL = "https://certificate.sdl.nodma.com/certificate/"
       let certId = ""
   
       if(downloadUrl != "") {
